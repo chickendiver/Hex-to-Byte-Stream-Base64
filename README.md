@@ -17,3 +17,11 @@ This will authenticate you to use the appropriate oauth details. Then, configure
   "status": "ACTIVE",
   "description": "DESCRIPTION TO BE ATTACHED TO THE BEACON",
 }
+
+For more information, use:
+
+https://developers.google.com/beacons/proximity/how-tos/authorizing
+
+https://developers.google.com/beacons/proximity/register?hl=en
+
+
