@@ -1,24 +1,46 @@
 /******************************************************************************
- *  Compilation:  javac HelloWorld.java
- *  Execution:    java HelloWorld
+ * 
  *
  ******************************************************************************/
 
 import static java.lang.System.out;
 
-import java.io.IOException;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.store.DataStoreFactory;
+import com.google.api.client.util.store.FileDataStoreFactory;
 
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.fluent.Form;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.entity.ContentType;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Collections;
 
 import static java.lang.System.exit;
 
 public class Base64Encode {
 	
 	protected static byte[] eddystoneBeaconId;
-    
+	private static final String APPLICATION_NAME = "Tablespace-BeaconTool/0.1.0";
+	private static final java.io.File DATA_STORE_DIR =
+		      new java.io.File(System.getProperty("user.home"), ".store/beacon_tool");
+	/**
+	   * Global instance of the {@link DataStoreFactory}. The best practice is to make it a single
+	   * globally shared instance across your application.
+	   */
+	  private static FileDataStoreFactory dataStoreFactory;
+
+	  /** Global instance of the HTTP transport. */
+	  private static HttpTransport httpTransport;
+
+	  /** Global instance of the JSON factory. */
+	  private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+	
     public static void main(String[] args) {
         
         String namespaceHexVal = null;
@@ -99,26 +121,30 @@ public class Base64Encode {
         return data;
     }
     
-    public static void registerBeacon(String encodedEddystoneId){
-    	// The fluent API relieves the user from having to deal with manual deallocation of system
-    	// resources at the cost of having to buffer response content in memory in some cases.
-
+    /*public static void registerBeacon(String encodedEddystoneId){
     	try {
-			System.out.println("Request response" + Request.Post("")
-			.bodyString("Important stuff", ContentType.DEFAULT_TEXT)
-			.execute().returnContent());
-			
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	/*
-    	Request.Post("http://targethost/login")
-    	    .bodyForm(Form.form().add("username",  "vip").add("password",  "secret").build())
-    	    .execute().returnContent();*/
+    	    httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+    	    dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
+    	    // authorization
+    	    //Credential credential = authorize();
+    	    // set up global Plus instance
+    	    plus = new Plus.Builder(httpTransport, JSON_FACTORY, credential).setApplicationName(
+    	        APPLICATION_NAME).build();
+    	    
+    	   // ...
     }
+    	
+	private static Credential authorize() throws Exception {
+		  // load client secrets
+		  GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
+		      new InputStreamReader(PlusSample.class.getResourceAsStream("/client_secrets.json")));
+		  // set up authorization code flow
+		  GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+		      httpTransport, JSON_FACTORY, clientSecrets,
+		      Collections.singleton(PlusScopes.PLUS_ME)).setDataStoreFactory(
+		      dataStoreFactory).build();
+		  // authorize
+		  return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+	}*/
 
 }
