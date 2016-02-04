@@ -8,8 +8,7 @@ To create a new namespace id, turn your beacon into configuration mode and confi
 To register the beacon, use https://developers.google.com/oauthplayground and input your Google Developer Console (https://console.developers.google.com) oauth credientials in the settings menu (select "client-side" OAuth flow). Then, enter "https://www.googleapis.com/auth/userlocation.beacon.registry" in the box on the left and hit "Authorize APIs".
 
 This will authenticate you to use the appropriate oauth details. Then, configure a POST request to "https://proximitybeacon.googleapis.com/v1beta1/beacons:register", with the body containing a JSON string looking like this:
-
-{
+<PRE> {
   "advertisedId": {
     "type": "EDDYSTONE",
     "id": "[BASE 64 ENCODED BEACON ID]"
@@ -17,7 +16,7 @@ This will authenticate you to use the appropriate oauth details. Then, configure
   "status": "ACTIVE",
   "description": "DESCRIPTION TO BE ATTACHED TO THE BEACON",
 }
-
+</PRE> 
 For more information, use:
 
 https://developers.google.com/beacons/proximity/how-tos/authorizing
