@@ -5,6 +5,14 @@ Takes a 20 character namespace id and a 12 character instance id as arguments.
 
 To create a new namespace id, turn your beacon into configuration mode and configure it as an Eddystone beacon. Then, generate a new UID from URI using "tablespace.com/beacon[beacon id], where [beacon id] is the id printed on the back of the beacon.
 
+Compile the program, by running
+
+    javac -cp "./lib/*" ./src/Base64Encode.java
+    
+Then add your namespace and instance ids as the arguments to 
+
+    java Base64Endcode {argument}
+
 To register the beacon, use https://developers.google.com/oauthplayground and input your Google Developer Console (https://console.developers.google.com) oauth credientials in the settings menu (select "client-side" OAuth flow). Then, enter "https://www.googleapis.com/auth/userlocation.beacon.registry" in the box on the left and hit "Authorize APIs".
 
 This will authenticate you to use the appropriate oauth details. Then, configure a POST request to "https://proximitybeacon.googleapis.com/v1beta1/beacons:register", with the body containing a JSON string looking like this:
