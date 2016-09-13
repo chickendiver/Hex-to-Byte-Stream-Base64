@@ -11,7 +11,8 @@ Compile the program, by running
     
 Then add your namespace and instance ids as the arguments to 
 
-    java Base64Endcode {argument}
+    java -cp "./lib/commons-codec-1.10.jar;./src/;" Base64Encode [namespaceid] [instanceid]
+
 
 To register the beacon, use https://developers.google.com/oauthplayground and input your Google Developer Console (https://console.developers.google.com) oauth credientials in the settings menu (select "client-side" OAuth flow). Then, enter "https://www.googleapis.com/auth/userlocation.beacon.registry" in the box on the left and hit "Authorize APIs".
 
