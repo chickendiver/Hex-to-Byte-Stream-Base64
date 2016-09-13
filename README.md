@@ -26,6 +26,18 @@ This will authenticate you to use the appropriate oauth details. Then, configure
   "description": "DESCRIPTION TO BE ATTACHED TO THE BEACON",
 }
 </PRE> 
+
+This will return a new beacon instance, including a beacon name. Use that beacon name to attach data, by POSTing this request:
+
+     {
+      "namespacedType":"bradleys-oauth-playground/string",
+      "data":"[data string]"
+    }
+
+to 
+
+    https://proximitybeacon.googleapis.com/v1beta1/beacons/[beaconNam]e/attachments
+
 For more information, use:
 
 https://developers.google.com/beacons/proximity/how-tos/authorizing
